@@ -1,7 +1,7 @@
 # 마스터 워커 공통영역
 $ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 $ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-$ sudo apt-get install -y kubelet=1.15.5-00 kubeadm=1.15.5-00 kubectl=1.15.5-00 
+$ sudo apt-get install -y kubelet kubeadm kubectl 
 $ sudo apt-mark hold kubelet kubeadm kubectl
 $ sudo sysctl net.bridge.bridge-nf-call-iptables=1
 
@@ -14,8 +14,8 @@ $ mkdir -p $HOME/.kube
 $ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 $ sudo chown $(id -u):$(id –g) $HOME/.kube/config
 # enable master node scheduling
-$ kubectl taint nodes --all node-role.kubernetes.io/master-
-$ kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
+$ sudo kubectl taint nodes --all node-role.kubernetes.io/master-
+$ sudo kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
 
 # 워커노드
 $ sudo kubeadm join 10.140.0.30:6443 --token gvqzq2.790jhot66r6214y7 --discovery-token-ca-cert-hash sha256:f51f7098225f661c09183e0da5af1de42eca51ff0d7aaad18af38d2b1ae15740
